@@ -1,12 +1,14 @@
 # 1)
 
-def safe_call(f, x, y, z):
+def safe_call(f, *args):
     anot = f.__annotations__
-    vars = locals()
+    vars = args
+    i = 0
     for v in anot:
-        if type(vars[v]) is not anot[v]:
+        if type(vars[i]) is not anot[v]:
             raise Exception("Invalid parameters type: " + v)
-    return f(x, y, z)
+        i += 1
+    return f(*args)
 
 
 def f(x: int, y: float, z):
